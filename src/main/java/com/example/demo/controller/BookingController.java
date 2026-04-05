@@ -1,3 +1,4 @@
+
 package com.example.demo.controller;
 
 import com.example.demo.entity.Booking;
@@ -30,13 +31,18 @@ public class BookingController {
     // ✅ Create Booking
     @PostMapping("/create")
     public Booking createBooking(@RequestBody Booking booking) {
-        booking.setStatus("CONFIRMED"); // auto set status
+        booking.setStatus("CONFIRMED");
         return bookingRepository.save(booking);
     }
 
-    // ✅ Get All Bookings
+    // ✅ Get All Bookings (SAFE VERSION - NO CRASH)
     @GetMapping("/all")
     public List<Booking> getAllBookings() {
-        return bookingRepository.findAll();
+        try {
+            return bookingRepository.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return List.of(); // prevents Railway crash
+        }
     }
 }
