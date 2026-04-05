@@ -5,7 +5,7 @@ function ViewBookings() {
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8081/booking/all")
+    axios.get("https://resource-booking-system-production.up.railway.app/booking/all")
       .then(response => {
         setBookings(response.data);
       })

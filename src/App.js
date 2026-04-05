@@ -264,7 +264,7 @@ function App() {
 
   // ✅ Fetch bookings
   const fetchBookings = () => {
-    axios.get("http://localhost:8081/booking/all")
+    axios.get("https://resource-booking-system-production.up.railway.app/booking/all")
       .then(res => setBookings(res.data))
       .catch(err => console.error(err));
   };
@@ -292,7 +292,7 @@ function App() {
       startTime: booking.startDate + "T" + booking.startTime,
       endTime:   booking.endDate   + "T" + booking.endTime
     };
-    axios.post("http://localhost:8081/booking/create", finalBooking)
+    axios.get("https://resource-booking-system-production.up.railway.app/booking/all", finalBooking)
       .then(() => {
         show("🎉 Booking confirmed!", "success");
         setShowConfetti(true);

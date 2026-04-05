@@ -21,7 +21,7 @@ function BookingForm() {
     e.preventDefault();
 
     try {
-     axios.post("http://localhost:8081/booking/create", booking);
+     axios.get("https://resource-booking-system-production.up.railway.app/booking/all", booking);
       alert("Booking Created Successfully");
     } catch (error) {
       console.error(error);
