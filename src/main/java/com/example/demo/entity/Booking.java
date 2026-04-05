@@ -1,10 +1,8 @@
+
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import java.time.LocalDateTime;
+import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Booking {
@@ -13,49 +11,24 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long resourceId;
-
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
-
     private String status;
 
-    public Booking() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "resource_id")
 
-    public Long getId() {
-        return id;
-    }
+    // 🔥 THIS LINE FIXES YOUR 502
+    @JsonIgnore
+    private Resource resource;
 
-    public Long getResourceId() {
-        return resourceId;
-    }
+    public Booking() {}
 
-    public void setResourceId(Long resourceId) {
-        this.resourceId = resourceId;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public Resource getResource() { return resource; }
+    public void setResource(Resource resource) { this.resource = resource; }
 }
+
